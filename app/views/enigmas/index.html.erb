@@ -1,0 +1,22 @@
+<h2>Listing enigmas <% if @tag != nil%>for tag <%= @tag %><% end %></h2>
+<% if @enigmas.empty? %>
+No enigma can be found.
+<% else %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Tags</th>
+  </tr>
+<% @enigmas.each do |enigma| %>
+  <tr>
+    <th><b><%= enigma.id %></b></th>
+    <th><%= link_to enigma.title, enigma %></th>
+    <th><%= enigma.tags_string %></th>
+  </tr>
+<% end %>
+</table>
+<% end %>
+<br />
+<%= link_to 'New Enigma', new_enigma_path %>
+

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+<p><b>Problem <%= @enigma.id %>,</b> <%= @enigma.date_string %></p>
+<p>
+  <b>Name:</b>
+  <%= @enigma.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @enigma.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= simple_format(@enigma.content) %>
+</p>
+
+<p>
+  <b>Short solution:</b>
+  <%= @enigma.short_solution %>
+</p>
+
+<p>
+  <b>Long solution:</b>
+  <%= simple_format(@enigma.long_solution) %>
+</p>
+<p>
+  <b>Tags:</b>
+  <% @tags.each do |tag| %><%= tag.name %> <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_enigma_path(@enigma) %> |
+<%= link_to 'Back', enigmas_path %>

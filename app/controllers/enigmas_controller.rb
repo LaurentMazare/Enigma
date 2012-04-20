@@ -40,6 +40,7 @@ class EnigmasController < ApplicationController
   # GET /enigmas/1/edit
   def edit
     @enigma = Enigma.find(params[:id])
+    @tag_ids = @enigma.tags.map{ |tag| tag.id }
   end
 
   # POST /enigmas
@@ -62,6 +63,8 @@ class EnigmasController < ApplicationController
   # PUT /enigmas/1.json
   def update
     @enigma = Enigma.find(params[:id])
+    tag_ids = params[:enigma][:tags].find_all{ |x| x != "" }
+    params[:enigma][:tags] = tag_ids.map{ |tag_id| Tag.find(tag_id) }
 
     respond_to do |format|
       if @enigma.update_attributes(params[:enigma])

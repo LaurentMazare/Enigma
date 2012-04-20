@@ -47,10 +47,9 @@ class EnigmasController < ApplicationController
   # POST /enigmas
   # POST /enigmas.json
   def create
-    @enigma = Enigma.new(params[:enigma])
     tag_ids = params[:enigma][:tags].find_all{ |x| x != "" }
     params[:enigma][:tags] = tag_ids.map{ |tag_id| Tag.find(tag_id) }
-
+    @enigma = Enigma.new(params[:enigma])
     respond_to do |format|
       if @enigma.save
         format.html { redirect_to @enigma, notice: 'Enigma was successfully created.' }

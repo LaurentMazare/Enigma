@@ -1,4 +1,5 @@
 class EnigmasController < ApplicationController
+  before_filter :authenticate, :except => [:index, :show]
   # GET /enigmas
   # GET /enigmas.json
   def index
@@ -47,6 +48,8 @@ class EnigmasController < ApplicationController
   # POST /enigmas.json
   def create
     @enigma = Enigma.new(params[:enigma])
+    tag_ids = params[:enigma][:tags].find_all{ |x| x != "" }
+    params[:enigma][:tags] = tag_ids.map{ |tag_id| Tag.find(tag_id) }
 
     respond_to do |format|
       if @enigma.save
@@ -77,15 +80,16 @@ class EnigmasController < ApplicationController
     end
   end
 
-  # DELETE /enigmas/1
-  # DELETE /enigmas/1.json
-  def destroy
-    @enigma = Enigma.find(params[:id])
-    @enigma.destroy
+  protected
 
-    respond_to do |format|
-      format.html { redirect_to enigmas_url }
-      format.json { head :no_content }
+  def authenticate
+    authenticate_or_request_with_http_basic do |login, pass|
+      if Rails.env.production?
+        login == ENV['EDIT_LOGIN'] && pass == ENV['EDIT_PASSWORD']
+      else
+        login == "tl" && pass == "tl"
+      end
     end
   end
+
 end

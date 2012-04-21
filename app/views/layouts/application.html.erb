@@ -7,21 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h1><i>Teaser Land</i></h1>
+  <h1><i>TeaserLand</i></h1>
   <p id="notice"><%= notice %></p>
   <div id="container">
     <%= yield %>
-  <br />
-  <br />
-  <% if logged_in? %>
-    <%= current_user.login %> | <%= link_to "logout", "/logout" %>
-  <% else %>
-    <%= form_tag "/login" do %>
-    <%= text_field_tag :login, "login" %>
-    <%= password_field_tag :password, "password" %>
-    <%= submit_tag "Log In" %>
+  <div align="right">
+    <% if logged_in? %>
+      <%= current_user.login %> |
+      <%= link_to 'New Enigma', new_enigma_path %> |
+      <%= link_to "Logout", "/logout" %> |
+      <%= link_to "About", "/about" %>
+    <% else %>
+      <br />
+      <%= form_tag "/login" do %>
+        <%= text_field_tag :login, "login" %>
+        <%= password_field_tag :password, "password" %>
+        <%= submit_tag "Log In" %>
+        <%= link_to "About", "/about" %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+  </div>
 </body>
 </html>

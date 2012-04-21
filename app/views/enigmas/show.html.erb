@@ -1,28 +1,38 @@
-<p><b>Enigma <%= @enigma.id %> -- <%= @enigma.title %></b>
-<p>
-  <b>Content:</b>
+<h3>Enigma <%= @enigma.id %> -- <%= @enigma.title %></h3>
+<div class="problem" style="margin:20px">
+  <p>
   <%= simple_format(@enigma.content) %>
-</p>
+  </p>
+</div>
 
-<p>
-  <b>Short solution:</b>
-  <%= @enigma.short_solution %>
-</p>
-
-<p>
-  <b>Long solution:</b>
-  <%= simple_format(@enigma.long_solution) %>
-</p>
-<p>
+<div class="solution">
+  <div style="margin:20px; margin-top:5px">
+    <div class="quotetitle">
+      <strong>Solution</strong>
+      <input type="button" value="Show" style="width:60px;font-size:10px;margin:0px;padding:0px;" 
+      onclick="if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') {
+        this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = '';        
+        this.innerText = ''; 
+        this.value = 'Hide'; 
+        } 
+        else { 
+        this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; 
+        this.innerText = ''; 
+        this.value = 'Show'; 
+        }" />
+  </div>
+  <div class="quotecontent"><div style="display: none;">
+    <%= simple_format(@enigma.long_solution) %>
+</div></div></div></div>
+<div class="tags" style="margin:20px">
   <b>Tags:</b>
   <% @tags.each do |tag| %><%= tag.name %> <% end %>
-</p>
-
-
-<% if logged_in? %>
-  <%= link_to 'New Enigma', new_enigma_path %> |
-  <%= link_to 'Edit', edit_enigma_path(@enigma) %> |
-<% end %>
-<%= link_to 'Back', enigmas_path %> |
-Created on <%= @enigma.date_string %>
-<% if not @enigma.user.nil? %>by <%= @enigma.user.login %><% end %>
+</div>
+<div class="navbar" align="right">
+  <% if logged_in? %>
+    <%= link_to 'Edit', edit_enigma_path(@enigma) %> |
+  <% end %>
+  <%= link_to 'All Enigmas', enigmas_path %> |
+  Created on <%= @enigma.date_string %>
+  <% if not @enigma.user.nil? %>by <%= @enigma.user.login %><% end %>
+</div>

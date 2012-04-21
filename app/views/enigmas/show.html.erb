@@ -19,6 +19,10 @@
 </p>
 
 
-<% if logged_in? %><%= link_to 'Edit', edit_enigma_path(@enigma) %> |<% end %>
+<% if logged_in? %>
+  <%= link_to 'New Enigma', new_enigma_path %> |
+  <%= link_to 'Edit', edit_enigma_path(@enigma) %> |
+<% end %>
 <%= link_to 'Back', enigmas_path %> |
 Created on <%= @enigma.date_string %>
+<% if not @enigma.user.nil? %>by <%= @enigma.user.login %><% end %>

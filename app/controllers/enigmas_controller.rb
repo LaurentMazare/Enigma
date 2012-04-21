@@ -4,7 +4,7 @@ class EnigmasController < ApplicationController
   # GET /enigmas.json
   def index
     @tag     = params[:tag_id]
-    @enigmas = Enigma.all
+    @enigmas = Enigma.all.sort
     if @tag != nil
       @enigmas = @enigmas.find_all{ |item| item.tags.index{|t| t.name == @tag} != nil }
     end
@@ -49,6 +49,7 @@ class EnigmasController < ApplicationController
   def create
     tag_ids = params[:enigma][:tags].find_all{ |x| x != "" }
     params[:enigma][:tags] = tag_ids.map{ |tag_id| Tag.find(tag_id) }
+    params[:enigma][:user] = current_user
     @enigma = Enigma.new(params[:enigma])
     respond_to do |format|
       if @enigma.save
@@ -67,7 +68,9 @@ class EnigmasController < ApplicationController
     @enigma = Enigma.find(params[:id])
     tag_ids = params[:enigma][:tags].find_all{ |x| x != "" }
     params[:enigma][:tags] = tag_ids.map{ |tag_id| Tag.find(tag_id) }
-
+    if @enigma.user.nil?
+      params[:enigma][:user] = current_user
+    end
     respond_to do |format|
       if @enigma.update_attributes(params[:enigma])
         format.html { redirect_to @enigma, notice: 'Enigma was successfully updated.' }

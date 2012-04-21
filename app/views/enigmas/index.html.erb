@@ -4,15 +4,19 @@ No enigma can be found.
 <% else %>
 <table>
   <tr>
-    <th width = "15%">ID</th>
+    <th width = "10%">ID</th>
     <th width = "50%" align = "left">Description/Title</th>
     <th width = "20%" align = "left">Tags</th>
+    <th width = "15%" align = "left">Author</th>
   </tr>
 <% @enigmas.each do |enigma| %>
   <tr>
     <th><b><%= enigma.id %></b></th>
     <th align = "left"><%= link_to enigma.title, enigma %></th>
     <th align = "left"><%= enigma.tags_string %></th>
+    <th align = "left">
+      <% if not enigma.user.nil? %><%= enigma.user.login %><% else %>Unknown<% end %>
+    </th>
   </tr>
 <% end %>
 </table>

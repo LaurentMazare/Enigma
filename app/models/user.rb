@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :login, :on => :create
   validates_presence_of :email, :on => :create
+  has_many :enigmas
 end

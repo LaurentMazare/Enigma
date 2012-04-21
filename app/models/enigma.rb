@@ -1,6 +1,7 @@
 class Enigma < ActiveRecord::Base
-  attr_accessible :content, :long_solution, :name, :short_solution, :title, :tags
+  attr_accessible :content, :long_solution, :name, :short_solution, :title, :tags, :user
   has_and_belongs_to_many :tags
+  belongs_to :user
 
   def tags_string
     tags.map{|tag| tag.name}.join(", ")

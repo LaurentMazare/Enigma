@@ -26,13 +26,14 @@
 </div></div></div></div>
 <div class="tags" style="margin:20px">
   <b>Tags:</b>
-  <% @tags.each do |tag| %><%= tag.name %> <% end %>
+  <% @tags.each do |tag| %><%= link_to tag.name, "/tags/" + String(tag.id) %> <% end %>
 </div>
 <div class="navbar" align="right">
   <% if logged_in? %>
     <%= link_to 'Edit', edit_enigma_path(@enigma) %> |
   <% end %>
-  <%= link_to 'All Enigmas', enigmas_path %> |
   Created on <%= @enigma.date_string %>
-  <% if not @enigma.user.nil? %>by <%= @enigma.user.login %><% end %>
+  <% if not @enigma.user.nil? %>
+    by <%= link_to @enigma.user.login, "/users/" + String(@enigma.user.id) %>
+  <% end %>
 </div>

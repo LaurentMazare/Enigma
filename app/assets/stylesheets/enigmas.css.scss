@@ -1,3 +1,12 @@
 // Place all the styles related to the Enigmas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.enigma_list a, .enigma_list a:visited { 
+  text-decoration: none;
+  color: #111111;
+}
+
+.enigma_list a:hover { 
+  color: #DDDDDD;
+  background-color: #222222;
+}

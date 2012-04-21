@@ -1,23 +1,33 @@
-<h2>Enigmas <% if @tag != nil%>for tag <%= @tag %><% end %></h2>
+<h2>Enigmas <% if not @filter.nil? %>for <%= @filter %><% end %></h2>
 <% if @enigmas.empty? %>
-No enigma can be found.
+  No enigma can be found.
 <% else %>
-<table>
-  <tr>
-    <th width = "10%"><b>ID</b></th>
-    <th width = "50%" align = "left"><b>Description/Title</b></th>
-    <th width = "20%" align = "left"><b>Tags</b></th>
-    <th width = "15%" align = "left"><b>Author</b></th>
-  </tr>
-<% @enigmas.each do |enigma| %>
-  <tr>
-    <th><b><%= enigma.id %></b></th>
-    <th align = "left"><%= link_to enigma.title, enigma %></th>
-    <th align = "left"><%= enigma.tags_string %></th>
-    <th align = "left">
-      <% if not enigma.user.nil? %><%= enigma.user.login %><% else %>Unknown<% end %>
-    </th>
-  </tr>
-<% end %>
-</table>
+  <div class="enigma_list">
+    <table>
+      <tr>
+        <th width = "10%"><b>ID</b></th>
+        <th width = "50%" align = "left"><b>Description/Title</b></th>
+        <th width = "20%" align = "left"><b>Tags</b></th>
+        <th width = "15%" align = "left"><b>Author</b></th>
+      </tr>
+      <% @enigmas.each do |enigma| %>
+        <tr>
+          <th><b><%= enigma.id %></b></th>
+          <th align = "left"><%= link_to enigma.title, enigma %></th>
+          <th align = "left">
+            <% enigma.tags.each do |tag| %>
+              <%= link_to tag.name, "/tags/" + String(tag.id) %>
+            <% end %>
+          </th>
+          <th align = "left">
+            <% if not enigma.user.nil? %>
+              <%= link_to enigma.user.login, "/users/" + String(enigma.user.id) %>
+            <% else %>
+              Unknown
+            <% end %>
+          </th>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 <% end %>

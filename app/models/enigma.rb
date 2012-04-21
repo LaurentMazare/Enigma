@@ -3,10 +3,6 @@ class Enigma < ActiveRecord::Base
   has_and_belongs_to_many :tags
   belongs_to :user
 
-  def tags_string
-    tags.map{|tag| tag.name}.join(", ")
-  end
-
   def date_string
     created_at.strftime("%d %B %Y")
   end

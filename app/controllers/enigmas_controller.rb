@@ -3,10 +3,19 @@ class EnigmasController < ApplicationController
   # GET /enigmas
   # GET /enigmas.json
   def index
-    @tag     = params[:tag_id]
+    tag      = params[:tag_id]
+    user     = params[:user_id]
     @enigmas = Enigma.all.sort
-    if @tag != nil
-      @enigmas = @enigmas.find_all{ |item| item.tags.index{|t| t.name == @tag} != nil }
+    @filter  = nil
+    if tag != nil
+      tag = tag.to_i
+      @filter  = Tag.find(tag).name
+      @enigmas = @enigmas.find_all{ |item| item.tags.index{|t| t.id == tag} != nil }
+    end
+    if user != nil
+      user = user.to_i
+      @filter = User.find(user).login
+      @enigmas = @enigmas.find_all{ |item| item.user.id == user }
     end
 
     respond_to do |format|

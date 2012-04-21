@@ -8,8 +8,20 @@
 </head>
 <body>
   <h1><i>Teaser Land</i></h1>
+  <p id="notice"><%= notice %></p>
+  <div id="container">
+    <%= yield %>
   <br />
-<%= yield %>
-
+  <br />
+  <% if logged_in? %>
+    <%= current_user.login %> | <%= link_to "logout", "/logout" %>
+  <% else %>
+    <%= form_tag "/login" do %>
+    <%= text_field_tag :login, "login" %>
+    <%= password_field_tag :password, "password" %>
+    <%= submit_tag "Log In" %>
+    <% end %>
+  <% end %>
+</div>
 </body>
 </html>

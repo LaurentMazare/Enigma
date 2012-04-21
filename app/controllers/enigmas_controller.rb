@@ -82,12 +82,10 @@ class EnigmasController < ApplicationController
   protected
 
   def authenticate
-    authenticate_or_request_with_http_basic do |login, pass|
-      if Rails.env.production?
-        login == ENV['EDIT_LOGIN'] && pass == ENV['EDIT_PASSWORD']
-      else
-        login == "tl" && pass == "tl"
-      end
+    if logged_in?
+      return true
+    else
+      redirect_to root_url, :notice => "You must be logged in to add/edit enigmas!"
     end
   end
 

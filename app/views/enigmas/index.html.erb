@@ -18,5 +18,5 @@ No enigma can be found.
 </table>
 <% end %>
 <br />
-<%= link_to 'New Enigma', new_enigma_path %>
+<% if logged_in? %><%= link_to 'New Enigma', new_enigma_path %><% end %>
 

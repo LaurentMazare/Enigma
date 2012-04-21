@@ -5,14 +5,14 @@ No enigma can be found.
 <table>
   <tr>
     <th width = "15%">ID</th>
-    <th width = "50%">Description/Title</th>
-    <th width = "20%">Tags</th>
+    <th width = "50%" align = "left">Description/Title</th>
+    <th width = "20%" align = "left">Tags</th>
   </tr>
 <% @enigmas.each do |enigma| %>
   <tr>
     <th><b><%= enigma.id %></b></th>
-    <th><%= link_to enigma.title, enigma %></th>
-    <th><%= enigma.tags_string %></th>
+    <th align = "left"><%= link_to enigma.title, enigma %></th>
+    <th align = "left"><%= enigma.tags_string %></th>
   </tr>
 <% end %>
 </table>

@@ -1,5 +1,5 @@
 class EnigmasController < ApplicationController
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate, :except => [:index]
   # GET /enigmas
   # GET /enigmas.json
   def index
@@ -97,7 +97,7 @@ class EnigmasController < ApplicationController
     if logged_in?
       return true
     else
-      redirect_to root_url, :notice => "You must be logged in to add/edit enigmas!"
+      redirect_to root_url, :notice => "You must be logged in to add/edit/view enigmas!"
     end
   end
 

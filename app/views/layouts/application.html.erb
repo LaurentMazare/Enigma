@@ -16,8 +16,8 @@
       <%= current_user.login %> |
       <%= link_to 'New Enigma', new_enigma_path %> |
       <%= link_to 'Home', enigmas_path %> |
-      <%= link_to "About", "/about" %>
-      <%= link_to "Logout", "/logout" %> |
+      <%= link_to "About", "/about" %> |
+      <%= link_to "Logout", "/logout" %>
     <% else %>
       <br />
       <%= form_tag "/login" do %>

@@ -3,12 +3,12 @@
   No enigma can be found.
 <% else %>
   <div class="enigma_list">
-    <table>
+    <table class="enigma_grid">
       <tr>
-        <th width = "10%"><b>ID</b></th>
-        <th width = "50%" align = "left"><b>Description/Title</b></th>
-        <th width = "20%" align = "left"><b>Tags</b></th>
-        <th width = "15%" align = "left"><b>Author</b></th>
+        <th width = "10%" class = "header_row"><b>ID</b></th>
+        <th width = "50%" align = "left" class = "header_row"><b>Description/Title</b></th>
+        <th width = "20%" align = "left" class = "header_row"><b>Tags</b></th>
+        <th width = "15%" align = "left" class = "header_row"><b>Author</b></th>
       </tr>
       <% @enigmas.each do |enigma| %>
         <tr>

@@ -10,3 +10,17 @@
   color: #DDDDDD;
   background-color: #222222;
 }
+
+.enigma_grid {
+  border-collapse: collapse;
+}
+
+.enigma_grid td, .enigma_grid th {
+  padding: 2px;
+  border: 1px solid #bbb;
+}
+
+.header_row {
+  background-color: #bbb;
+}
+

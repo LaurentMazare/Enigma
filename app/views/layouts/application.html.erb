@@ -7,6 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div align="right">
+    <%= link_to 'Home', enigmas_path %> |
+    <% Tag.all.sort{ |x, y| x.name <=> y.name }.each do |tag| %>
+      <%= link_to tag.name, "/tags/" + String(tag.id) %> |
+    <% end %>
+  </div>
   <h1><i>TeaserLand</i></h1>
   <p id="notice"><%= notice %></p>
   <div id="container">

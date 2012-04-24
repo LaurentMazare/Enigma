@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  def sorted_tags
+    return Tag.all
+  end
+
   private
 
   def current_user
@@ -9,6 +13,9 @@ class ApplicationController < ActionController::Base
   end
   def logged_in?
     return (not current_user.nil?)
+  end
+  def is_superuser?
+    return current_user.superuser != nil
   end
   helper_method :current_user
   helper_method :logged_in?

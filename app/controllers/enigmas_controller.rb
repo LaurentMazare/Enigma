@@ -1,5 +1,6 @@
 class EnigmasController < ApplicationController
   before_filter :authenticate, :except => [:index]
+  before_filter :authenticate_edit, :only => [:edit, :update]
   # GET /enigmas
   # GET /enigmas.json
   def index
@@ -98,7 +99,15 @@ class EnigmasController < ApplicationController
       return true
     else
       redirect_to root_url, :notice => "You must be logged in to add/edit/view enigmas!"
+      return false
     end
   end
-
+  def authenticate_edit
+    enigma = Enigma.find(params[:id])
+    if authenticate and (is_superuser? || enigma.user.id == current_user.id)
+      return true
+    end
+    redirect_to root_url, :notice => "You cannot edit enigmas that you haven't created!"
+    return false
+  end
 end

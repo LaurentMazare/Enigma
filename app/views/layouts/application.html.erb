@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TeaserLand</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div align="right">
-    <%= link_to 'Home', enigmas_path %> |
-    <% Tag.all.sort{ |x, y| x.name <=> y.name }.each do |tag| %>
-      <%= link_to tag.name, "/tags/" + String(tag.id) %> |
-    <% end %>
-  </div>
-  <h1><i>TeaserLand</i></h1>
-  <p id="notice"><%= notice %></p>
-  <div id="container">
-    <%= yield %>
-  <div align="right">
-    <% if logged_in? %>
-      <%= current_user.login %> |
-      <%= link_to 'New Enigma', new_enigma_path %> |
-      <%= link_to 'Home', enigmas_path %> |
-      <%= link_to "About", "/about" %> |
-      <%= link_to "Logout", "/logout" %>
-    <% else %>
-      <br />
-      <%= form_tag "/login" do %>
-        <%= text_field_tag :login, "login" %>
-        <%= password_field_tag :password, "password" %>
-        <%= submit_tag "Log In" %>
+  <head>
+    <title>TeaserLand</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="content">
+      <div align="right">
         <%= link_to 'Home', enigmas_path %> |
-        <%= link_to "About", "/about" %>
-      <% end %>
-    <% end %>
-  </div>
-  </div>
-</body>
+        <% Tag.all.sort{ |x, y| x.name <=> y.name }.each do |tag| %>
+          <%= link_to tag.name, "/tags/" + String(tag.id) %> |
+        <% end %>
+      </div>
+      <h1><i>TeaserLand</i></h1>
+      <p id="notice"><%= notice %></p>
+      <div id="container">
+        <%= yield %>
+        <div align="right">
+          <% if logged_in? %>
+            <%= current_user.login %> |
+            <%= link_to 'New Enigma', new_enigma_path %> |
+            <%= link_to 'Home', enigmas_path %> |
+            <%= link_to "About", "/about" %> |
+            <%= link_to "Logout", "/logout" %>
+          <% else %>
+            <br />
+            <%= form_tag "/login" do %>
+              <%= text_field_tag :login, "login" %>
+              <%= password_field_tag :password, "password" %>
+              <%= submit_tag "Log In" %>
+              <%= link_to 'Home', enigmas_path %> |
+              <%= link_to "About", "/about" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

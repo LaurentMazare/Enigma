@@ -1,12 +1,11 @@
 <h3>Enigma <%= @enigma.id %> -- <%= @enigma.title %></h3>
-<div class="problem" style="margin:20px">
+<div class="problem">
   <p>
   <%= simple_format(@enigma.content) %>
   </p>
 </div>
 
 <div class="solution">
-  <div style="margin:20px; margin-top:5px">
     <div class="quotetitle">
       <strong>Solution</strong>
       <input type="button" value="Show" style="width:60px;font-size:10px;margin:0px;padding:0px;" 
@@ -20,10 +19,10 @@
         this.innerText = ''; 
         this.value = 'Show'; 
         }" />
-  </div>
-  <div class="quotecontent"><div style="display: none;">
+    </div>
+    <div class="quotecontent"><div style="display: none;">
     <%= simple_format(@enigma.long_solution) %>
-</div></div></div></div>
+</div></div></div>
 <div class="tags" style="margin:20px">
   <b>Tags:</b>
   <% @tags.each do |tag| %><%= link_to tag.name, "/tags/" + String(tag.id) %> <% end %>

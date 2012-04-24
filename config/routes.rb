@@ -6,4 +6,5 @@ Teaser::Application.routes.draw do
   match "/users/:user_id" => "enigmas#index"
   match "/login" => "home#login"
   match "/logout" => "home#logout"
+  match "/about" => "home#about"
 end
